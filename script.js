@@ -36,5 +36,5 @@ function calculateMinCost() {
  }
 
  // Add answer to #result div element
- document.getElementById("result").innerText=totalCost;
+ document.getElementById("result").textContent=totalCost;
 }  
