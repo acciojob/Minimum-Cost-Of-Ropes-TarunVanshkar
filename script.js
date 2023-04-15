@@ -1,27 +1,40 @@
 function calculateMinCost() {
   //your code here
-  // get the input value and convert it to an array of integers
-    const input = document.getElementById("rope-lengths").value;
-    const ropeArray = input.split(",").map(Number);   // .map(Number)  convert each element of array into number
-    
-    // sort the rope lengths in increasing order
-    ropeArray.sort((a, b) => a - b);
-    
-    // initialize the total cost to 0
-    let totalCostOfRope = 0;
-    
-    // combine the smallest two ropes at each step until only one rope is left
-    while (ropeArray.length > 1) {
-      const rope1 = ropeArray.shift(); // remove the first array element and return it
-      const rope2 = ropeArray.shift();
-      const combinedRope = rope1 + rope2; // combine the two ropes
-      totalCostOfRope += combinedRope; // add the cost of combining the two ropes
-      ropeArray.push(combinedRope); // add the combined rope back to the array
-    //   console.log(ropeArray, combinedRope);
-      ropeArray.sort((a, b) => a - b); // sort the array again in non-decreasing order
-    //   console.log(ropeArray)
-    }
-    
-    // display the minimum cost in the result div
-    document.getElementById("result").innerHTML = totalCostOfRope;
+   // first of all get elements
+ let input=document.getElementById("rope-lengths");
+ let inputArr=input.value.split(",");
+
+ // Convert string into number
+ for(let i=0; i<inputArr.length; i++)
+ {
+  inputArr[i]=Number(inputArr[i]);
+ }
+
+ // Sort array in ascending order
+ inputArr.sort(function(a, b) {
+  return a-b;
+ })
+
+ let totalCost=0;
+ // Run loop till array length become 2
+ while(inputArr.length>1)
+ {
+  let rope1=inputArr[0];
+  let rope2=inputArr[1];
+  let cost=rope1+rope2;
+  totalCost+=cost;
+  
+  // delete first two elements
+  inputArr.splice(0, 2);
+
+  // add cost to array
+  inputArr.push(cost);
+
+  inputArr.sort(function(a, b) {
+    return a-b;
+   })
+ }
+
+ // Add answer to #result div element
+ document.getElementById("result").innerText=totalCost;
 }  
