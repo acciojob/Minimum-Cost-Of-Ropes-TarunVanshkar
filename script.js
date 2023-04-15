@@ -1,40 +1,23 @@
 function calculateMinCost() {
   //your code here
-   // first of all get elements
- let input=document.getElementById("rope-lengths");
- let inputArr=input.value.split(",");
+   var inputData = document.querySelector("#rope-lengths").value;
+	var inputArr = inputData.split(",");
 
- // Convert string into number
- for(let i=0; i<inputArr.length; i++)
- {
-  inputArr[i]=Number(inputArr[i]);
- }
+	for(var i = 0; i< inputArr.length; i++) {
+		inputArr[i] = Number(inputArr[i]);
+	}
+	var cost = 0;
+	inputArr.sort(function (a,b) { return a-b;});
 
- // Sort array in ascending order
- inputArr.sort(function(a, b) {
-  return a-b;
- })
+	while(inputArr.length > 1) {
+		var newRope = inputArr[0] + inputArr[1];
+		cost += newRope;
 
- let totalCost=0;
- // Run loop till array length become 2
- while(inputArr.length>1)
- {
-  let rope1=inputArr[0];
-  let rope2=inputArr[1];
-  let cost=rope1+rope2;
-  totalCost+=cost;
-  
-  // delete first two elements
-  inputArr.splice(0, 2);
-
-  // add cost to array
-  inputArr.push(cost);
-
-  inputArr.sort(function(a, b) {
-    return a-b;
-   })
- }
-
- // Add answer to #result div element
- document.getElementById("result").textContent=totalCost;
+		// delete first two element
+		inputArr.splice(0,2);
+		inputArr.push(newRope);
+		//alert(newRope);
+		inputArr.sort(function(a,b) { return a-b});
+	}	
+  document.querySelector("#result").textContent = cost;
 }  
